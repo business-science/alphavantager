@@ -9,12 +9,12 @@ alphavantager
 > A lightweight R interface to the Alpha Vantage API
 
 Alpha Vantage
-=============
+-------------
 
 Alpha Vantage is a free service that enables users to get real-time and historical equity data. New users will need to visit the [Alpha Vantage](https://www.alphavantage.co/) website and obtain an API key.
 
 R Interface: Getting Started
-============================
+----------------------------
 
 The `alphavantager` package provides a convenient and lightweight interface to the Alpha Vantage API.
 
@@ -32,7 +32,7 @@ Load the package.
 library(alphavantager)
 ```
 
-Set you API key (get one from the Alpha Vantage website if you don't already have one... it's free).
+Set your API key (get one from the [Alpha Vantage website](https://www.alphavantage.co/) if you don't already have one... it's free).
 
 ``` r
 av_api_key("YOUR_API_KEY")
@@ -40,7 +40,7 @@ print(av_api_key())
 #> [1] "YOUR_API_KEY"
 ```
 
-Now, you're ready to get financial data via `av_get()`, which accepts the same arguments as the [API Documentation](https://www.alphavantage.co/documentation/) parameters.
+Now, you're ready to get financial data via `av_get()`, which accepts the same<sup>1</sup> arguments as the [API Documentation](https://www.alphavantage.co/documentation/) parameters.
 
 #### Time Series Data
 
@@ -59,3 +59,7 @@ av_get(symbol = "MSFT", av_fun = "AROON", interval = "monthly", time_period = 60
 ``` r
 av_get(av_fun = "SECTOR")
 ```
+
+Notes:
+
+1.  The `av_fun` argument replaces the API parameter "function" because function is a reserved name in R. All other arguments match the Alpha Vantage API parameters.

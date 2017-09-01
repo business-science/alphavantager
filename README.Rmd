@@ -52,14 +52,14 @@ library(alphavantager)
 ```
 
 
-Set you API key (get one from the Alpha Vantage website if you don't already have one... it's free).
+Set your API key (get one from the [Alpha Vantage website](https://www.alphavantage.co/) if you don't already have one... it's free).
 
 ```{r}
 av_api_key("YOUR_API_KEY")
 print(av_api_key())
 ```
 
-Now, you're ready to get financial data via `av_get()`, which accepts the same arguments as the [API Documentation](https://www.alphavantage.co/documentation/) parameters.
+Now, you're ready to get financial data via `av_get()`, which accepts the same<sup>1</sup> arguments as the [API Documentation](https://www.alphavantage.co/documentation/) parameters. 
 
 #### Time Series Data
 
@@ -80,4 +80,6 @@ av_get(av_fun = "SECTOR")
 ```
 
 
+Notes:
 
+1. The `av_fun` argument replaces the API parameter "function" because function is a reserved name in R. All other arguments match the Alpha Vantage API parameters.
