@@ -40,7 +40,10 @@ print(av_api_key())
 #> [1] "YOUR_API_KEY"
 ```
 
-Now, you're ready to get financial data via `av_get()`, which accepts the same<sup>1</sup> arguments as the [API Documentation](https://www.alphavantage.co/documentation/) parameters.
+Getting Financial Data from Alpha Vantage
+-----------------------------------------
+
+Now, you're ready to get financial data via `av_get()`, which accepts the same<sup>1</sup> arguments as the [API Documentation](https://www.alphavantage.co/documentation/) parameters. Here are a few examples of getting data. You can pass additional API parameters via the `...`.
 
 #### Time Series Data
 
