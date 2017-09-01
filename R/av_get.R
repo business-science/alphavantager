@@ -1,0 +1,90 @@
+#' Get financial data from the Alpha Vantage API
+#'
+#' @name av_get
+#'
+#' @param symbol A character string of an appropriate stock or fund.
+#' See parameter "symbol" in [Alpha Vantage API documentation](https://www.alphavantage.co/documentation/).
+#' @param av_fun A character string matching an appropriate Alpha Vantage "function".
+#' See parameter "function" in [Alpha Vantage API documentation](https://www.alphavantage.co/documentation/).
+#' @param ... Additional parameters passed to the Alpha Vantage API.
+#' For a list of parameters, visit the [Alpha Vantage API documentation](https://www.alphavantage.co/documentation/).
+#'
+#' @return Returns a tibble of financial data
+#'
+#' @seealso [av_api_key()]
+#'
+#' @examples
+#' \dontrun{
+#' av_api_key("YOUR_API_KEY")
+#' av_get(symbol = "MSFT", av_fun = "TIME_SERIES_INTRADAY", interval = "15min", outputsize = "full")
+#' }
+#'
+#'
+#' @export
+av_get <- function(symbol = NULL, av_fun, ...) {
+
+    dots <- list(...)
+
+    # Overides
+    dots$symbol      <- symbol
+    dots$apikey      <- av_api_key()
+    dots$datatype    <- "csv"
+
+    # Generate URL
+    url_params <- stringr::str_c(names(dots), dots, sep = "=", collapse = "&")
+    url <- glue::glue("https://www.alphavantage.co/query?function={av_fun}&{url_params}")
+
+    # Alpha Advantage API call
+    response <- httr::GET(url)
+
+    # Handle bad status codes errors
+    if (!(httr::status_code(response) >= 200 && httr::status_code(response) < 300)) {
+        stop(httr::content(response, as="text"), call. = FALSE)
+    }
+
+    # Clean data
+    content_type <- response$headers$`content-type`
+    if (content_type == "application/json") {
+
+        content <- httr::content(response, as = "text", encoding = "UTF-8")
+
+        content_list <- content %>% jsonlite::fromJSON()
+
+        if (content_list[1] %>% names() == "Meta Data") {
+
+            if (av_fun == "SECTOR") {
+                content <- content_list %>%
+                    tibble::enframe() %>%
+                    dplyr::slice(-1) %>%
+                    dplyr::mutate(val = purrr::map(value, tibble::enframe)) %>%
+                    tidyr::unnest(val, .drop =T) %>%
+                    dplyr::mutate(val = purrr::map_chr(value, ~ .x[[1]] )) %>%
+                    dplyr::mutate(value = stringr::str_replace(val, "%", "") %>% as.numeric()) %>%
+                    dplyr::select(-val) %>%
+                    dplyr::rename(sector = name1, rank.group = name)
+            } else {
+                content <- content_list[[2]] %>%
+                    tibble::enframe() %>%
+                    dplyr::mutate(val = purrr::map(value, tibble::enframe)) %>%
+                    tidyr::unnest(val, .drop =T) %>%
+                    dplyr::mutate(val = purrr::map_dbl(value, ~ .x[[1]] %>% as.numeric())) %>%
+                    dplyr::select(-value) %>%
+                    tidyr::spread(key = name1, value = val) %>%
+                    dplyr::rename(timestamp = name) %>%
+                    dplyr::mutate(timestamp = lubridate::as_datetime(timestamp))
+            }
+
+        }
+
+    } else {
+        content <- httr::content(response, as = "text", encoding = "UTF-8") %>%
+            readr::read_csv()
+    }
+
+    names(content) <- names(content) %>%
+        make.names() %>%
+        tolower()
+
+    return(content)
+
+}
