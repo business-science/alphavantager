@@ -81,9 +81,13 @@ av_get <- function(symbol = NULL, av_fun, ...) {
             readr::read_csv()
     }
 
+    # Fix names
     names(content) <- names(content) %>%
         make.names() %>%
         tolower()
+
+    # Return desc
+    if ("timestamp" %in% names(content)) content <- content %>% dplyr::arrange(timestamp)
 
     return(content)
 

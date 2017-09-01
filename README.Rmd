@@ -31,7 +31,7 @@ knitr::opts_chunk$set(
 
 ## Alpha Vantage
 
-Alpha Vantage is a free service that enables users to get real-time and historical equity data. New users will need to visit the [Alpha Vantage](https://www.alphavantage.co/) website and obtain an API key. 
+Alpha Vantage is a free service that enables users to get real-time and historical equity data. New users will need to visit [Alpha Vantage](https://www.alphavantage.co/) and obtain an API key. 
 
 ## R Interface: Getting Started
 
@@ -52,7 +52,7 @@ library(alphavantager)
 ```
 
 
-Set your API key (get one from the [Alpha Vantage website](https://www.alphavantage.co/) if you don't already have one... it's free).
+Set your API key (get one from [Alpha Vantage](https://www.alphavantage.co/) if you don't already have one... it's free).
 
 ```{r}
 av_api_key("YOUR_API_KEY")
@@ -85,3 +85,5 @@ av_get(av_fun = "SECTOR")
 Notes:
 
 1. The `av_fun` argument replaces the API parameter "function" because function is a reserved name in R. All other arguments match the Alpha Vantage API parameters.
+
+2. There is no need to specify the `apikey` parameter as an argument to `av_get()`. The required method is to set the API key using `av_api_key("YOUR_API_KEY")`.
