@@ -5,7 +5,7 @@ has_file <- unlist(purrr::map(paths, file.exists))
 path <- if (any(has_file)) {
     paths[has_file][[1]]
 } else {
-    NULL
+    ""
 }
 
 has_auth <- file.exists(path)
