@@ -11,7 +11,7 @@ alphavantager
 Alpha Vantage
 -------------
 
-Alpha Vantage is a free service that enables users to get real-time and historical equity data. New users will need to visit [Alpha Vantage](https://www.alphavantage.co/) and obtain an API key.
+Alpha Vantage is a **free service** that enables users to get **real-time and historical financial data**. New users will need to visit [Alpha Vantage](https://www.alphavantage.co/) and obtain an API key.
 
 R Interface: Getting Started
 ----------------------------
@@ -43,7 +43,16 @@ print(av_api_key())
 Getting Financial Data from Alpha Vantage
 -----------------------------------------
 
-Now, you're ready to get financial data via `av_get()`, which accepts the same<sup>1</sup> arguments as the [API Documentation](https://www.alphavantage.co/documentation/) parameters. Here are a few examples of getting data. You can pass additional API parameters via the `...`.
+Now, you're ready to get financial data via `av_get()`, which accepts the same<sup>1</sup> arguments as the [API Documentation](https://www.alphavantage.co/documentation/) parameters. The function is setup with two primary arguments, `symbol` and `av_fun`, which accepts an equity and one of the API "function" parameters. You can pass additional API parameters via the `...`.
+
+``` r
+# Function is streamlined and user adds additional parameters via ... 
+args(av_get)
+#> function (symbol = NULL, av_fun, ...) 
+#> NULL
+```
+
+Here are a few examples of retrieving **real-time and historical financial data**!
 
 #### Time Series Data
 
@@ -70,3 +79,5 @@ av_get(av_fun = "SECTOR")
 2.  There is no need to specify the `apikey` parameter as an argument to `av_get()`. The required method is to set the API key using `av_api_key("YOUR_API_KEY")`.
 
 3.  There is no need to specify the `datatype` parameter as an argument to `av_get()`. The function will return a tibble data frame.
+
+4.  Some data sets only return 100 rows by default. Change the parameter `outputsize = "full"` to get the full dataset.
