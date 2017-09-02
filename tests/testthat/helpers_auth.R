@@ -1,7 +1,12 @@
-# Setup auth
+# Auth helpers
+
 paths <- c("~/.api_key.txt", "./tests/testthat/api_key.txt", "./api_key.txt")
 has_file <- unlist(purrr::map(paths, file.exists))
-path <- paths[has_file][[1]]
+path <- if (any(has_file)) {
+    paths[has_file][[1]]
+} else {
+    NULL
+}
 
 has_auth <- file.exists(path)
 
