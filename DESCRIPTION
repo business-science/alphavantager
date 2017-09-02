@@ -1,13 +1,13 @@
 Package: alphavantager
 Title: Lightweight R Interface to the Alpha Vantage API
-Version: 0.1.0.9000
+Version: 0.1.0
 Authors@R: c(
     person("Matt", "Dancho", email = "mdancho@business-science.io", role = c("aut", "cre")),
     person("Davis", "Vaughan", email = "dvaughan@business-science.io", role = c("aut"))
   )
 Description: 
     Alpha Vantage has free historical financial information. 
-    All you need to do is get a free API key at https://www.alphavantage.co.
+    All you need to do is get a free API key at <https://www.alphavantage.co>.
     Then you can use the R interface to retrieve free equity information.
     Refer to the Alpha Vantage website for more information.
 URL: https://github.com/business-science/alphavantager
@@ -37,4 +37,3 @@ Suggests:
     knitr
 RoxygenNote: 6.0.1
 Roxygen: list(markdown = TRUE)
-VignetteBuilder: knitr
