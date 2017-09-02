@@ -89,8 +89,16 @@ av_get <- function(symbol = NULL, av_fun, ...) {
 
         } else {
             # Bad Call
+
+            params_list <- list(symbol = symbol, av_fun = av_fun)
+            params_list <- c(params_list, dots)
+            params_list$apikey = "HIDDEN_FOR_YOUR_SAFETY"
+            params_list$datatype = NULL
+            params <- stringr::str_c(names(params_list), params_list, sep = "=", collapse = ", ") %>%
+                stringr::str_replace("av_fun", "function")
             content <- content %>%
-                jsonlite::fromJSON(flatten = T)
+                jsonlite::fromJSON(flatten = T)  %>%
+                stringr::str_c(". API parameters used: ", params)
             stop(content, call. = F)
         }
 

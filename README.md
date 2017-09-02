@@ -18,7 +18,7 @@ R Interface: Getting Started
 
 The `alphavantager` package provides a convenient and lightweight interface to the Alpha Vantage API.
 
-To get started, get the package from CRAN or from GitHub:
+To get started, install the package from CRAN or from GitHub:
 
 ``` r
 install.packages("alphavantager")
@@ -63,8 +63,10 @@ av_get(symbol = "MSFT", av_fun = "AROON", interval = "monthly", time_period = 60
 av_get(av_fun = "SECTOR")
 ```
 
-Notes:
+#### Important Notes: av\_get()
 
 1.  The `av_fun` argument replaces the API parameter "function" because function is a reserved name in R. All other arguments match the Alpha Vantage API parameters.
 
 2.  There is no need to specify the `apikey` parameter as an argument to `av_get()`. The required method is to set the API key using `av_api_key("YOUR_API_KEY")`.
+
+3.  There is no need to specify the `datatype` parameter as an argument to `av_get()`. The function will return a tibble data frame.
