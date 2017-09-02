@@ -23,7 +23,15 @@
 #' @export
 av_get <- function(symbol = NULL, av_fun, ...) {
 
+    # Checks
+    if (is.null(av_api_key())) {
+        stop("Please set API key using av_api_key().",
+             call. = FALSE)
+    }
+
+    # Setup
     dots <- list(...)
+    ua   <- httr::user_agent("https://github.com/business-science")
 
     # Overides
     dots$symbol      <- symbol
@@ -35,7 +43,7 @@ av_get <- function(symbol = NULL, av_fun, ...) {
     url <- glue::glue("https://www.alphavantage.co/query?function={av_fun}&{url_params}")
 
     # Alpha Advantage API call
-    response <- httr::GET(url)
+    response <- httr::GET(url, ua)
 
     # Handle bad status codes errors
     if (!(httr::status_code(response) >= 200 && httr::status_code(response) < 300)) {
@@ -43,7 +51,7 @@ av_get <- function(symbol = NULL, av_fun, ...) {
     }
 
     # Clean data
-    content_type <- response$headers$`content-type`
+    content_type <- httr::http_type(response)
     if (content_type == "application/json") {
 
         content <- httr::content(response, as = "text", encoding = "UTF-8")
@@ -92,3 +100,5 @@ av_get <- function(symbol = NULL, av_fun, ...) {
     return(content)
 
 }
+
+
