@@ -16,5 +16,10 @@ notifications:
     on_success: change
     on_failure: change
 
+before_install:
+  - openssl aes-256-cbc
+      -K $encrypted_effddfd5c5ef_key -iv $encrypted_effddfd5c5ef_iv
+      -in api_key.txt.enc -out api_key.txt -d
+
 after_success:
   - Rscript -e 'covr::codecov()'
