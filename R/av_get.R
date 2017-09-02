@@ -53,14 +53,18 @@ av_get <- function(symbol = NULL, av_fun, ...) {
     # Clean data
     content_type <- httr::http_type(response)
     if (content_type == "application/json") {
+        # JSON returned
 
         content <- httr::content(response, as = "text", encoding = "UTF-8")
 
         content_list <- content %>% jsonlite::fromJSON()
 
+        # Detect good/bad call
         if (content_list[1] %>% names() == "Meta Data") {
+            # Good call
 
             if (av_fun == "SECTOR") {
+                # Sector Performance Cleanup
                 content <- content_list %>%
                     tibble::enframe() %>%
                     dplyr::slice(-1) %>%
@@ -71,6 +75,7 @@ av_get <- function(symbol = NULL, av_fun, ...) {
                     dplyr::select(-val) %>%
                     dplyr::rename(sector = name1, rank.group = name)
             } else {
+                # Technical Indicator Cleanup
                 content <- content_list[[2]] %>%
                     tibble::enframe() %>%
                     dplyr::mutate(val = purrr::map(value, tibble::enframe)) %>%
@@ -82,9 +87,15 @@ av_get <- function(symbol = NULL, av_fun, ...) {
                     dplyr::mutate(timestamp = lubridate::as_datetime(timestamp))
             }
 
+        } else {
+            # Bad Call
+            content <- content %>%
+                jsonlite::fromJSON(flatten = T)
+            stop(content, call. = F)
         }
 
     } else {
+        # CSV Returned - Good Call - Time Series CSV file
         content <- httr::content(response, as = "text", encoding = "UTF-8") %>%
             readr::read_csv()
     }
