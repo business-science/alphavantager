@@ -86,4 +86,19 @@ test_that("call results in error", {
 
 })
 
+test_that("call with no API key is stopped", {
 
+    skip_if_no_auth()
+
+    key <- av_api_key()
+
+    options(av_api_key = NULL)
+
+    symbol   <- "MSFT"
+    av_fun   <- "TIME_SERIES_DAILY"
+
+    expect_error(av_get(symbol, av_fun))
+
+    av_api_key(key)
+
+})
