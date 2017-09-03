@@ -25,7 +25,7 @@ av_get <- function(symbol = NULL, av_fun, ...) {
 
     # Checks
     if (is.null(av_api_key())) {
-        stop("Please set API key using av_api_key().",
+        stop("Set API key using av_api_key(). If you do not have an API key, please claim your free API key on (https://www.alphavantage.co/support/#api-key). It should take less than 20 seconds, and is free permanently.",
              call. = FALSE)
     }
 
@@ -76,15 +76,11 @@ av_get <- function(symbol = NULL, av_fun, ...) {
                     dplyr::rename(sector = name1, rank.group = name)
             } else {
                 # Technical Indicator Cleanup
-                content <- content_list[[2]] %>%
-                    tibble::enframe() %>%
-                    dplyr::mutate(val = purrr::map(value, tibble::enframe)) %>%
-                    tidyr::unnest(val, .drop =T) %>%
-                    dplyr::mutate(val = purrr::map_dbl(value, ~ .x[[1]] %>% as.numeric())) %>%
-                    dplyr::select(-value) %>%
-                    tidyr::spread(key = name1, value = val) %>%
-                    dplyr::rename(timestamp = name) %>%
-                    dplyr::mutate(timestamp = lubridate::as_datetime(timestamp))
+                content <- do.call(rbind, lapply(content_list[[2]], unlist)) %>%
+                    timetk::tk_tbl(rename_index = "timestamp") %>%
+                    dplyr::mutate_if(is.factor, as.character) %>%
+                    dplyr::mutate_if(is.character, as.numeric)
+
             }
 
         } else {
@@ -107,10 +103,12 @@ av_get <- function(symbol = NULL, av_fun, ...) {
         # CSV Returned - Good Call - Time Series CSV file
         content <- httr::content(response, as = "text", encoding = "UTF-8") %>%
             readr::read_csv()
+
     }
 
     # Fix names
     names(content) <- names(content) %>%
+        stringr::str_replace("[0-9]+\\. ", "") %>%
         make.names() %>%
         tolower()
 

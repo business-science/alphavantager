@@ -1,3 +1,7 @@
+# alphavantager 0.1.0.9000
+
+* Fix JSON performance
+
 
 # alphavantager 0.1.0
 
