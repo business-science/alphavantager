@@ -16,7 +16,7 @@ License: GPL (>= 3)
 Encoding: UTF-8
 LazyData: true
 Depends: 
-    R (>= 3.4.0)
+    R (>= 3.3.0)
 Imports:
     devtools (>= 1.12.0),
     dplyr (>= 0.7.0),
