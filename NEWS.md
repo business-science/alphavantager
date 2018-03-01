@@ -2,6 +2,8 @@
 
 * Fix JSON performance
 
+* Reduce R version dependency to 3.3.0
+
 
 # alphavantager 0.1.0
 
