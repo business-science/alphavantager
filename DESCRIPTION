@@ -26,11 +26,11 @@ Imports:
     readr (>= 1.1.1),
     stringr (>= 1.2.0),
     tibble (>= 1.3.3),
-    tidyr (>= 0.6.3)
+    tidyr (>= 0.6.3),
+    timetk (>= 0.1.1.1)
 Suggests:
     tidyquant,
     tidyverse,
-    timetk,
     testthat,
     knitr
 RoxygenNote: 6.0.1
