@@ -16,3 +16,9 @@ skip_if_no_auth <- function() {
 if (!is.na(maybe_key)) {
     av_api_key(maybe_key)
 }
+
+# only 5 api calls per minute allowed
+delay_15_seconds <- function() {
+    Sys.sleep(15)
+}
+
