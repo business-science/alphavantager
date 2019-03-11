@@ -3,7 +3,7 @@ Title: Lightweight R Interface to the Alpha Vantage API
 Version: 0.1.1
 Authors@R: c(
     person("Matt", "Dancho", email = "mdancho@business-science.io", role = c("aut", "cre")),
-    person("Davis", "Vaughan", email = "dvaughan@business-science.io", role = c("aut"))
+    person("Davis", "Vaughan", email = "davis@rstudio.com", role = c("aut"))
   )
 Description: 
     Alpha Vantage has free historical financial information. 
