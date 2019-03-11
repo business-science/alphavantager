@@ -1,12 +1,12 @@
 ## Release Summary
-This is the first release of `alphavantager` for CRAN review. 
+This is the second release of alphavantager. Mainly, this release fixes a few
+API rate limited tests.
 
 
 ## Test environments
-* local Windows install, R 3.4.0
-* ubuntu 12.04 (on travis-ci), R 3.4.0
+* local Mac OS install, R 3.5.2
+* ubuntu 14.04 (on travis-ci) (release)
 * win-builder (devel and release)
-
 
 ## R CMD check results
 There were no ERRORs, WARNINGs or NOTEs.
