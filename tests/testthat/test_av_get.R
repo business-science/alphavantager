@@ -4,6 +4,7 @@ context("av_get() API interface")
 test_that("call TIMES_SERIES_INTRADAY", {
 
     skip_if_no_auth()
+    skip_on_cran()
 
     # Time Series Intraday
     symbol   <- "MSFT"
@@ -31,6 +32,7 @@ test_that("call TIMES_SERIES_INTRADAY", {
 test_that("call SECTOR", {
 
     skip_if_no_auth()
+    skip_on_cran()
 
     symbol   <- NULL
     av_fun   <- "SECTOR"
@@ -46,6 +48,7 @@ test_that("call SECTOR", {
 test_that("call Technical Indicators", {
 
     skip_if_no_auth()
+    skip_on_cran()
 
     # SMA
     symbol       <- "MSFT"
@@ -78,6 +81,7 @@ test_that("call Technical Indicators", {
 test_that("call results in error", {
 
     skip_if_no_auth()
+    skip_on_cran()
 
     symbol   <- NULL
     av_fun   <- "TIME_SERIES_DAILY"
@@ -89,6 +93,7 @@ test_that("call results in error", {
 test_that("call with no API key is stopped", {
 
     skip_if_no_auth()
+    skip_on_cran()
 
     key <- av_api_key()
 
