@@ -86,6 +86,10 @@ av_get <- function(symbol = NULL, av_fun, ...) {
         } else {
             # Bad Call
 
+            if (is.null(symbol)) {
+                symbol <- "NULL"
+            }
+
             params_list <- list(symbol = symbol, av_fun = av_fun)
             dots$symbol <- NULL
             params_list <- c(params_list, dots)
