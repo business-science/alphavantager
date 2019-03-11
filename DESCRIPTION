@@ -18,7 +18,6 @@ LazyData: true
 Depends: 
     R (>= 3.3.0)
 Imports:
-    devtools (>= 1.12.0),
     dplyr (>= 0.7.0),
     glue (>= 1.1.1),
     httr (>= 1.2.1),
