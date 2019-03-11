@@ -18,21 +18,17 @@ LazyData: true
 Depends: 
     R (>= 3.3.0)
 Imports:
-    devtools (>= 1.12.0),
     dplyr (>= 0.7.0),
     glue (>= 1.1.1),
     httr (>= 1.2.1),
     jsonlite (>= 1.5),
     purrr (>= 0.2.2.2),
-    lubridate (>= 1.6.0),
     readr (>= 1.1.1),
     stringr (>= 1.2.0),
     tibble (>= 1.3.3),
-    tidyr (>= 0.6.3)
+    tidyr (>= 0.6.3),
+    timetk (>= 0.1.1.1)
 Suggests:
-    tidyquant,
-    tidyverse,
-    timetk,
     testthat,
     knitr
 RoxygenNote: 6.0.1
