@@ -1,4 +1,16 @@
-# alphavantager 0.1.0.9000
+# alphavantager development
+
+# alphavantager 0.1.1
+
+* Move `timetk` into Imports
+
+* Remove `tidyquant` and `tidyverse` from Suggests
+
+* Remove `lubridate` and `devtools` as Imports
+
+* Simplify internal API key retrieval
+
+* Fix API rate limited tests
 
 * Fix JSON performance
 

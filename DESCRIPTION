@@ -1,9 +1,9 @@
 Package: alphavantager
 Title: Lightweight R Interface to the Alpha Vantage API
-Version: 0.1.0.9000
+Version: 0.1.1.9000
 Authors@R: c(
     person("Matt", "Dancho", email = "mdancho@business-science.io", role = c("aut", "cre")),
-    person("Davis", "Vaughan", email = "dvaughan@business-science.io", role = c("aut"))
+    person("Davis", "Vaughan", email = "davis@rstudio.com", role = c("aut"))
   )
 Description: 
     Alpha Vantage has free historical financial information. 
@@ -31,5 +31,5 @@ Imports:
 Suggests:
     testthat,
     knitr
-RoxygenNote: 6.0.1
+RoxygenNote: 6.1.1
 Roxygen: list(markdown = TRUE)
