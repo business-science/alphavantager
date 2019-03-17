@@ -83,6 +83,17 @@ av_get <- function(symbol = NULL, av_fun, ...) {
 
             }
 
+
+        }
+            # Realtime Currency Exchange Rate
+        if (content_list[1] %>% names() == "Realtime Currency Exchange Rate") {
+            content <- content_list %>% tibble::enframe() %>%
+                dplyr::mutate(val = purrr::map(value, tibble::enframe)) %>%
+                tidyr::unnest(val, .drop = T) %>%
+                tidyr::spread(key = name1, value = value) # %>%
+                # tidyr::unite(`Currency Exchange`, `2. From_Currency Name`, `4. To_Currency Name`, sep = " to ") %>%
+                # tidyr::unite(Symbol, `1. From_Currency Code`, `3. To_Currency Code`, sep = "/") %>%
+                # dplyr::select(Name = name, `Currency Exchange`, Symbol, `Exchange Rate` = `5. Exchange Rate`, `Last Refreshed` = `6. Last Refreshed`)
         } else {
             # Bad Call
 
