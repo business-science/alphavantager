@@ -76,6 +76,20 @@ Here are a few examples of retrieving __real-time and historical financial data_
 av_get(symbol = "MSFT", av_fun = "TIME_SERIES_INTRADAY", interval = "15min")
 ```
 
+#### ForEx
+
+```{r, eval=F}
+# REAL-TIME QUOTE
+av_get("EUR/USD", av_fun = "CURRENCY_EXCHANGE_RATE")
+```
+
+```{r}
+# TIME SERIES
+av_get("EUR/USD", av_fun = "FX_DAILY")
+```
+
+
+
 #### Technical Indicators
 
 ```{r, eval=F}

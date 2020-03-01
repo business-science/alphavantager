@@ -1,10 +1,9 @@
 ## Release Summary
-This is the second release of alphavantager. Mainly, this release fixes a few
-API rate limited tests.
+This is the third release of alphavantager. This release adds support for ForEx.
 
 
 ## Test environments
-* local Mac OS install, R 3.5.2
+* local Mac OS install, R 3.6.1
 * ubuntu 14.04 (on travis-ci) (release)
 * win-builder (devel and release)
 
