@@ -145,20 +145,20 @@ av_get(symbol = "MSFT", av_fun = "AROON", interval = "monthly", time_period = 60
 
 ``` r
 av_get(av_fun = "SECTOR")
-#> # A tibble: 108 x 3
-#>    rank_group                    sector                 change
-#>    <chr>                         <chr>                   <dbl>
-#>  1 Rank A: Real-Time Performance Energy                 0.0125
-#>  2 Rank A: Real-Time Performance Information Technology 0.0125
-#>  3 Rank A: Real-Time Performance Communication Services 0.0125
-#>  4 Rank A: Real-Time Performance Consumer Discretionary 0.0125
-#>  5 Rank A: Real-Time Performance Industrials            0.0125
-#>  6 Rank A: Real-Time Performance Materials              0.0125
-#>  7 Rank A: Real-Time Performance Health Care            0.0125
-#>  8 Rank A: Real-Time Performance Consumer Staples       0.0125
-#>  9 Rank A: Real-Time Performance Real Estate            0.0125
-#> 10 Rank A: Real-Time Performance Financials             0.0125
-#> # … with 98 more rows
+#> # A tibble: 110 x 3
+#>    rank_group                             sector  change
+#>    <chr>                                  <chr>    <dbl>
+#>  1 Rank A: Real-Time Performance          Energy  0.0125
+#>  2 Rank B: 1 Day Performance              Energy  0.0125
+#>  3 Rank C: 5 Day Performance              Energy -0.154 
+#>  4 Rank D: 1 Month Performance            Energy -0.178 
+#>  5 Rank E: 3 Month Performance            Energy -0.212 
+#>  6 Rank F: Year-to-Date (YTD) Performance Energy -0.247 
+#>  7 Rank G: 1 Year Performance             Energy -0.291 
+#>  8 Rank H: 3 Year Performance             Energy -0.341 
+#>  9 Rank I: 5 Year Performance             Energy -0.405 
+#> 10 Rank J: 10 Year Performance            Energy -0.179 
+#> # … with 100 more rows
 ```
 
 #### Important Notes: av\_get()
