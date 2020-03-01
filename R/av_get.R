@@ -17,6 +17,11 @@
 #' __Get more than one symbol.__ The Alpha Vantage API is setup to return one symbol
 #' per API call. Use the `tidyquant::tq_get()` API to get multiple symbols.
 #'
+#' __Getting ForEx (Symbol Details).__ FOREX symbols in the `av_get()` function are
+#' supplied in `"FROM/TO"` format, which are then parsed in the Alpha Vantage API
+#' into `from_currency` and `to_currency` API parameters. Usage example:
+#' `av_get(symbol = "EUR/USD", av_fun = "FX_DAILY")`
+#'
 #' @examples
 #' \dontrun{
 #'

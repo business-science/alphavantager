@@ -25,6 +25,11 @@ Get financial data from the Alpha Vantage API
 \details{
 \strong{Get more than one symbol.} The Alpha Vantage API is setup to return one symbol
 per API call. Use the \code{tidyquant::tq_get()} API to get multiple symbols.
+
+\strong{Getting ForEx (Symbol Details).} FOREX symbols in the \code{av_get()} function are
+supplied in \code{"FROM/TO"} format, which are then parsed in the Alpha Vantage API
+into \code{from_currency} and \code{to_currency} API parameters. Usage example:
+\code{av_get(symbol = "EUR/USD", av_fun = "FX_DAILY")}
 }
 \examples{
 \dontrun{
