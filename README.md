@@ -73,6 +73,20 @@ data**\!
 
 ``` r
 av_get(symbol = "MSFT", av_fun = "TIME_SERIES_INTRADAY", interval = "15min")
+#> # A tibble: 100 x 6
+#>    timestamp            open  high   low close  volume
+#>    <dttm>              <dbl> <dbl> <dbl> <dbl>   <dbl>
+#>  1 2020-02-25 10:45:00  172.  173.  171.  173. 1947367
+#>  2 2020-02-25 11:00:00  173.  173.  171.  171. 1648589
+#>  3 2020-02-25 11:15:00  171.  172.  170.  171. 1912259
+#>  4 2020-02-25 11:30:00  171.  171.  170.  171. 2144892
+#>  5 2020-02-25 11:45:00  171.  171.  171.  171. 1496695
+#>  6 2020-02-25 12:00:00  171.  173.  171.  172. 1445612
+#>  7 2020-02-25 12:15:00  172.  173.  172.  172. 1224751
+#>  8 2020-02-25 12:30:00  172.  172.  171.  172. 1449176
+#>  9 2020-02-25 12:45:00  172.  172.  171.  171. 1065737
+#> 10 2020-02-25 13:00:00  171.  172.  171.  171.  997559
+#> # … with 90 more rows
 ```
 
 #### ForEx
@@ -80,6 +94,12 @@ av_get(symbol = "MSFT", av_fun = "TIME_SERIES_INTRADAY", interval = "15min")
 ``` r
 # REAL-TIME QUOTE
 av_get("EUR/USD", av_fun = "CURRENCY_EXCHANGE_RATE")
+#> # A tibble: 1 x 9
+#>   from_currency_c… from_currency_n… to_currency_code to_currency_name
+#>   <chr>            <chr>            <chr>            <chr>           
+#> 1 EUR              Euro             USD              United States D…
+#> # … with 5 more variables: exchange_rate <dbl>, last_refreshed <dttm>,
+#> #   time_zone <chr>, bid_price <dbl>, ask_price <dbl>
 ```
 
 ``` r
@@ -105,12 +125,40 @@ av_get("EUR/USD", av_fun = "FX_DAILY")
 
 ``` r
 av_get(symbol = "MSFT", av_fun = "AROON", interval = "monthly", time_period = 60)
+#> # A tibble: 180 x 3
+#>    time       aroon_down aroon_up
+#>    <date>          <dbl>    <dbl>
+#>  1 2020-02-28       10      100  
+#>  2 2020-01-31       11.7    100  
+#>  3 2019-12-31       13.3    100  
+#>  4 2019-11-29       15      100  
+#>  5 2019-10-31       16.7    100  
+#>  6 2019-09-30       18.3    100  
+#>  7 2019-08-30       20       98.3
+#>  8 2019-07-31       21.7    100  
+#>  9 2019-06-28       23.3    100  
+#> 10 2019-05-31        0       98.3
+#> # … with 170 more rows
 ```
 
 #### Sector Performances
 
 ``` r
 av_get(av_fun = "SECTOR")
+#> # A tibble: 108 x 3
+#>    rank_group                    sector                 change
+#>    <chr>                         <chr>                   <dbl>
+#>  1 Rank A: Real-Time Performance Energy                 0.0125
+#>  2 Rank A: Real-Time Performance Information Technology 0.0125
+#>  3 Rank A: Real-Time Performance Communication Services 0.0125
+#>  4 Rank A: Real-Time Performance Consumer Discretionary 0.0125
+#>  5 Rank A: Real-Time Performance Industrials            0.0125
+#>  6 Rank A: Real-Time Performance Materials              0.0125
+#>  7 Rank A: Real-Time Performance Health Care            0.0125
+#>  8 Rank A: Real-Time Performance Consumer Staples       0.0125
+#>  9 Rank A: Real-Time Performance Real Estate            0.0125
+#> 10 Rank A: Real-Time Performance Financials             0.0125
+#> # … with 98 more rows
 ```
 
 #### Important Notes: av\_get()

@@ -83,7 +83,7 @@ av_get(symbol = "MSFT", av_fun = "TIME_SERIES_INTRADAY", interval = "15min")
 av_get("EUR/USD", av_fun = "CURRENCY_EXCHANGE_RATE")
 ```
 
-```{r}
+```{r, eval=F}
 # TIME SERIES
 av_get("EUR/USD", av_fun = "FX_DAILY")
 ```
