@@ -73,7 +73,10 @@ Here are a few examples of retrieving __real-time and historical financial data_
 #### Time Series Data
 
 ```{r, eval=F}
-av_get(symbol = "MSFT", av_fun = "TIME_SERIES_INTRADAY", interval = "15min")
+av_get(symbol     = "MSFT", 
+       av_fun     = "TIME_SERIES_INTRADAY", 
+       interval   = "15min", 
+       outputsize = "full")
 ```
 
 #### ForEx
@@ -85,7 +88,7 @@ av_get("EUR/USD", av_fun = "CURRENCY_EXCHANGE_RATE")
 
 ```{r, eval=F}
 # TIME SERIES
-av_get("EUR/USD", av_fun = "FX_DAILY")
+av_get("EUR/USD", av_fun = "FX_DAILY", outputsize = "full")
 ```
 
 
@@ -93,7 +96,11 @@ av_get("EUR/USD", av_fun = "FX_DAILY")
 #### Technical Indicators
 
 ```{r, eval=F}
-av_get(symbol = "MSFT", av_fun = "AROON", interval = "monthly", time_period = 60)
+av_get(symbol      = "MSFT", 
+       av_fun      = "AROON", 
+       interval    = "monthly", 
+       time_period = 60, 
+       outputsize  = "full")
 ```
 
 #### Sector Performances

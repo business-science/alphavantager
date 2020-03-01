@@ -1,3 +1,9 @@
+# alphavantager 0.1.2.9000
+
+* `av_get()` - Improve function details in help manual and ReadMe. 
+
+* `av_fun = "SECTOR"` - Fix bug where the same values were being returned. 
+
 # alphavantager 0.1.2
 
 * `av_get()` - Add support for ForEx using `symbol = "EUR/USD"` format
