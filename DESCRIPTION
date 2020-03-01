@@ -1,6 +1,6 @@
 Package: alphavantager
 Title: Lightweight R Interface to the Alpha Vantage API
-Version: 0.1.2
+Version: 0.1.2.9000
 Authors@R: c(
     person("Matt", "Dancho", email = "mdancho@business-science.io", role = c("aut", "cre")),
     person("Davis", "Vaughan", email = "davis@rstudio.com", role = c("aut"))
