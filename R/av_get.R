@@ -40,10 +40,10 @@
 #' # ---- 1.0 STOCK TIME SERIES ----
 #'
 #' # 1.1 TIME SERIES INTRADAY
-#' av_get("MSFT", av_fun = "TIME_SERIES_INTRADAY", interval = "5min")
+#' av_get("MSFT", av_fun = "TIME_SERIES_INTRADAY", interval = "5min", outputsize = "full")
 #'
 #' # 1.2 TIME SERIES DAILY ADJUSTED
-#' av_get("MSFT", av_fun = "TIME_SERIES_DAILY_ADJUSTED")
+#' av_get("MSFT", av_fun = "TIME_SERIES_DAILY_ADJUSTED", outputsize = "full")
 #'
 #' # 1.3 QUOTE ENDPOINTS
 #' av_get("MSFT", av_fun = "GLOBAL_QUOTE")
@@ -51,13 +51,13 @@
 #' # ---- 2.0 FOREX ----
 #'
 #' # 2.1 CURRENCY EXCHANGE RATES
-#' data <- av_get("EUR/USD", av_fun = "CURRENCY_EXCHANGE_RATE")
+#' av_get("EUR/USD", av_fun = "CURRENCY_EXCHANGE_RATE")
 #'
 #' # 2.2 FX INTRADAY
-#' av_get("EUR/USD", av_fun = "FX_INTRADAY", interval = "5min")
+#' av_get("EUR/USD", av_fun = "FX_INTRADAY", interval = "5min", outputsize = "full")
 #'
 #' # 2.3. FX DAILY
-#' av_get("EUR/USD", av_fun = "FX_DAILY")
+#' av_get("EUR/USD", av_fun = "FX_DAILY", outputsize = "full")
 #'
 #' # ---- 3.0 TECHNICAL INDICATORS ----
 #'
