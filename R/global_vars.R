@@ -1,1 +1,1 @@
-globalVariables(c("name", "name1", "timestamp", "val", "value", "value1", "change"))
+globalVariables(c("name", "name1", "timestamp", "value", "change", "rank_group"))

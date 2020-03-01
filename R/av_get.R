@@ -117,17 +117,13 @@ av_get <- function(symbol, av_fun, ...) {
 
             if (av_fun == "SECTOR") {
                 # Sector Performance Cleanup ----
+                content_list$`Meta Data` <- NULL
                 content <- content_list %>%
-                    tibble::enframe() %>%
-                    dplyr::slice(-1) %>%
-                    dplyr::mutate(val = purrr::map(value, tibble::enframe)) %>%
-                    tidyr::unnest(val, .drop =T) %>%
-                    dplyr::mutate(val = purrr::map_chr(value, ~ .x[[1]] )) %>%
-                    dplyr::select(-value1) %>%
-                    dplyr::mutate(change = stringr::str_replace(val, "%", "") %>% as.numeric()) %>%
-                    dplyr::mutate(change = change / 100) %>%
-                    dplyr::select(-val, -value) %>%
-                    dplyr::rename(sector = name1, rank.group = name)
+                    purrr::map_dfr(tibble::as_tibble) %>%
+                    tibble::add_column(rank_group = names(content_list), .before = 1) %>%
+                    tidyr::gather("sector", "change", -rank_group) %>%
+                    dplyr::mutate(change = stringr::str_replace(change, "%", "") %>% as.numeric()) %>%
+                    dplyr::mutate(change = change / 100)
             } else {
                 # Technical Indicator Cleanup ----
                 content <- do.call(rbind, lapply(content_list[[2]], unlist)) %>%
