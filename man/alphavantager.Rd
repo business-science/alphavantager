@@ -3,7 +3,6 @@
 \docType{package}
 \name{alphavantager}
 \alias{alphavantager}
-\alias{alphavantager-package}
 \title{alphavantager: A lightweight R interface to the Alpha Vantage API}
 \description{
 alphavantager: A lightweight R interface to the Alpha Vantage API

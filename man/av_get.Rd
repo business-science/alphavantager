@@ -4,7 +4,7 @@
 \alias{av_get}
 \title{Get financial data from the Alpha Vantage API}
 \usage{
-av_get(symbol = NULL, av_fun, ...)
+av_get(symbol, av_fun, ...)
 }
 \arguments{
 \item{symbol}{A character string of an appropriate stock or fund.
@@ -22,11 +22,49 @@ Returns a tibble of financial data
 \description{
 Get financial data from the Alpha Vantage API
 }
+\details{
+\strong{Get more than one symbol.} The Alpha Vantage API is setup to return one symbol
+per API call. Use the \code{tidyquant::tq_get()} API to get multiple symbols.
+}
 \examples{
 \dontrun{
+
+# SETUP API KEY
 av_api_key("YOUR_API_KEY")
-av_get(symbol = "MSFT", av_fun = "TIME_SERIES_INTRADAY", interval = "15min", outputsize = "full")
+
+# ---- 1.0 STOCK TIME SERIES ----
+
+# 1.1 TIME SERIES INTRADAY
+av_get("MSFT", av_fun = "TIME_SERIES_INTRADAY", interval = "5min")
+
+# 1.2 TIME SERIES DAILY ADJUSTED
+av_get("MSFT", av_fun = "TIME_SERIES_DAILY_ADJUSTED")
+
+# 1.3 QUOTE ENDPOINTS
+av_get("MSFT", av_fun = "GLOBAL_QUOTE")
+
+# ---- 2.0 FOREX ----
+
+# 2.1 CURRENCY EXCHANGE RATES
+data <- av_get("EUR/USD", av_fun = "CURRENCY_EXCHANGE_RATE")
+
+# 2.2 FX INTRADAY
+av_get("EUR/USD", av_fun = "FX_INTRADAY", interval = "5min")
+
+# 2.3. FX DAILY
+av_get("EUR/USD", av_fun = "FX_DAILY")
+
+# ---- 3.0 TECHNICAL INDICATORS ----
+
+# 3.1 SMA
+av_get("MSFT", av_fun = "SMA", interval = "weekly", time_period = 10, series_type = "open")
+
+# ---- 4.0 SECTOR PERFORMANCE ----
+
+# 4.1 Sector Performance
+av_get(av_fun = "SECTOR")
 }
+
 
 
 }

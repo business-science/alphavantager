@@ -13,15 +13,55 @@
 #'
 #' @seealso [av_api_key()]
 #'
+#' @details
+#' __Get more than one symbol.__ The Alpha Vantage API is setup to return one symbol
+#' per API call. Use the `tidyquant::tq_get()` API to get multiple symbols.
+#'
 #' @examples
 #' \dontrun{
+#'
+#' # SETUP API KEY
 #' av_api_key("YOUR_API_KEY")
-#' av_get(symbol = "MSFT", av_fun = "TIME_SERIES_INTRADAY", interval = "15min", outputsize = "full")
+#'
+#' # ---- 1.0 STOCK TIME SERIES ----
+#'
+#' # 1.1 TIME SERIES INTRADAY
+#' av_get("MSFT", av_fun = "TIME_SERIES_INTRADAY", interval = "5min")
+#'
+#' # 1.2 TIME SERIES DAILY ADJUSTED
+#' av_get("MSFT", av_fun = "TIME_SERIES_DAILY_ADJUSTED")
+#'
+#' # 1.3 QUOTE ENDPOINTS
+#' av_get("MSFT", av_fun = "GLOBAL_QUOTE")
+#'
+#' # ---- 2.0 FOREX ----
+#'
+#' # 2.1 CURRENCY EXCHANGE RATES
+#' data <- av_get("EUR/USD", av_fun = "CURRENCY_EXCHANGE_RATE")
+#'
+#' # 2.2 FX INTRADAY
+#' av_get("EUR/USD", av_fun = "FX_INTRADAY", interval = "5min")
+#'
+#' # 2.3. FX DAILY
+#' av_get("EUR/USD", av_fun = "FX_DAILY")
+#'
+#' # ---- 3.0 TECHNICAL INDICATORS ----
+#'
+#' # 3.1 SMA
+#' av_get("MSFT", av_fun = "SMA", interval = "weekly", time_period = 10, series_type = "open")
+#'
+#' # ---- 4.0 SECTOR PERFORMANCE ----
+#'
+#' # 4.1 Sector Performance
+#' av_get(av_fun = "SECTOR")
 #' }
 #'
 #'
+#'
 #' @export
-av_get <- function(symbol = NULL, av_fun, ...) {
+av_get <- function(symbol, av_fun, ...) {
+
+    if (missing(symbol)) symbol <- NULL
 
     # Checks
     if (is.null(av_api_key())) {
@@ -38,6 +78,18 @@ av_get <- function(symbol = NULL, av_fun, ...) {
     dots$apikey      <- av_api_key()
     dots$datatype    <- "csv"
 
+    # Forex
+    is_forex <- FALSE
+    if (!is.null(symbol)) is_forex <- stringr::str_detect(symbol, "\\/")
+    if (is_forex) {
+        currencies  <- symbol %>% stringr::str_split_fixed("\\/", 2) %>% as.vector()
+        dots$symbol <- NULL
+        dots$from_currency <- currencies[[1]]
+        dots$to_currency   <- currencies[[2]]
+        dots$from_symbol   <- currencies[[1]]
+        dots$to_symbol     <- currencies[[2]]
+    }
+
     # Generate URL
     url_params <- stringr::str_c(names(dots), dots, sep = "=", collapse = "&")
     url <- glue::glue("https://www.alphavantage.co/query?function={av_fun}&{url_params}")
@@ -50,7 +102,7 @@ av_get <- function(symbol = NULL, av_fun, ...) {
         stop(httr::content(response, as="text"), call. = FALSE)
     }
 
-    # Clean data
+    # # Clean data
     content_type <- httr::http_type(response)
     if (content_type == "application/json") {
         # JSON returned
@@ -64,18 +116,20 @@ av_get <- function(symbol = NULL, av_fun, ...) {
             # Good call
 
             if (av_fun == "SECTOR") {
-                # Sector Performance Cleanup
+                # Sector Performance Cleanup ----
                 content <- content_list %>%
                     tibble::enframe() %>%
                     dplyr::slice(-1) %>%
                     dplyr::mutate(val = purrr::map(value, tibble::enframe)) %>%
                     tidyr::unnest(val, .drop =T) %>%
                     dplyr::mutate(val = purrr::map_chr(value, ~ .x[[1]] )) %>%
-                    dplyr::mutate(value = stringr::str_replace(val, "%", "") %>% as.numeric()) %>%
-                    dplyr::select(-val) %>%
+                    dplyr::select(-value1) %>%
+                    dplyr::mutate(change = stringr::str_replace(val, "%", "") %>% as.numeric()) %>%
+                    dplyr::mutate(change = change / 100) %>%
+                    dplyr::select(-val, -value) %>%
                     dplyr::rename(sector = name1, rank.group = name)
             } else {
-                # Technical Indicator Cleanup
+                # Technical Indicator Cleanup ----
                 content <- do.call(rbind, lapply(content_list[[2]], unlist)) %>%
                     timetk::tk_tbl(rename_index = "timestamp") %>%
                     dplyr::mutate_if(is.factor, as.character) %>%
@@ -83,6 +137,11 @@ av_get <- function(symbol = NULL, av_fun, ...) {
 
             }
 
+        } else if (is_forex) {
+            # ForEx Cleanup ----
+            content <- content_list %>%
+                purrr::flatten_dfc() %>%
+                purrr::map_dfc(readr::parse_guess)
         } else {
             # Bad Call
 
@@ -112,8 +171,9 @@ av_get <- function(symbol = NULL, av_fun, ...) {
 
     # Fix names
     names(content) <- names(content) %>%
-        stringr::str_replace("[0-9]+\\. ", "") %>%
+        stringr::str_replace_all("[0-9]+\\. ", "") %>%
         make.names() %>%
+        stringr::str_replace_all("\\.", "_") %>%
         tolower()
 
     # Return desc
