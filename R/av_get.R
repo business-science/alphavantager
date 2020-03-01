@@ -14,10 +14,19 @@
 #' @seealso [av_api_key()]
 #'
 #' @details
+#'
+#' __The `av_fun` argument replaces the API parameter “function”__ because function is a reserved name in R. All other arguments match the Alpha Vantage API parameters.
+#'
+#' __There is no need to specify the `apikey` parameter__ as an argument to av_get(). The required method is to set the API key using av_api_key("YOUR_API_KEY").
+#'
+#' __There is no need to specify the datatype parameter__ as an argument to av_get(). The function will return a tibble data frame.
+#'
+#' __Some data sets only return 100 rows by default.__ Change the parameter `outputsize = "full"` to get the full dataset.
+#'
 #' __Get more than one symbol.__ The Alpha Vantage API is setup to return one symbol
 #' per API call. Use the `tidyquant::tq_get()` API to get multiple symbols.
 #'
-#' __Getting ForEx (Symbol Details).__ FOREX symbols in the `av_get()` function are
+#' __ForEx "FROM/TO" symbol details.__ FOREX symbols in the `av_get()` function are
 #' supplied in `"FROM/TO"` format, which are then parsed in the Alpha Vantage API
 #' into `from_currency` and `to_currency` API parameters. Usage example:
 #' `av_get(symbol = "EUR/USD", av_fun = "FX_DAILY")`
