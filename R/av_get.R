@@ -92,6 +92,7 @@ av_get <- function(symbol, av_fun, ...) {
     dots$apikey      <- av_api_key()
     dots$datatype    <- "csv"
 
+
     # Forex
     is_forex <- FALSE
     if (!is.null(symbol)) is_forex <- stringr::str_detect(symbol, "\\/")
@@ -102,6 +103,12 @@ av_get <- function(symbol, av_fun, ...) {
         dots$to_currency   <- currencies[[2]]
         dots$from_symbol   <- currencies[[1]]
         dots$to_symbol     <- currencies[[2]]
+    }
+
+    #symbol search
+    if(av_fun == "SYMBOL_SEARCH") {
+        dots$symbol <- NULL
+        dots$keywords <- symbol
     }
 
     # Generate URL
@@ -122,8 +129,6 @@ av_get <- function(symbol, av_fun, ...) {
         # JSON returned
 
         content <- httr::content(response, as = "text", encoding = "UTF-8")
-
-        content_list <- content %>% jsonlite::fromJSON()
 
         # Detect good/bad call
         if (content_list[1] %>% names() == "Meta Data") {
