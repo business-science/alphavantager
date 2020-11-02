@@ -147,6 +147,12 @@ av_get <- function(symbol, av_fun, ...) {
 
             }
 
+        }  else if (av_fun == "OVERVIEW") {
+            # Historical Data Cleanup ----
+            content <- content_list  %>%
+                    purrr::map_dfr(tibble::as_tibble) %>%
+                    tibble::add_column(rank_group = names(content_list), .before = 1)
+
         } else if (is_forex) {
             # ForEx Cleanup ----
             content <- content_list %>%
@@ -192,5 +198,3 @@ av_get <- function(symbol, av_fun, ...) {
     return(content)
 
 }
-
-

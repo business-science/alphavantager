@@ -6,7 +6,7 @@ output: github_document
 
 ```{r, echo = FALSE}
 knitr::opts_chunk$set(
-    message = F, 
+    message = F,
     warning = F,
     collapse = TRUE,
     comment = "#>",
@@ -31,11 +31,11 @@ knitr::opts_chunk$set(
 
 ## Alpha Vantage
 
-Alpha Vantage is a __free service__ that enables users to get __real-time and historical financial data__. New users will need to visit [Alpha Vantage](https://www.alphavantage.co/) and obtain an API key. 
+Alpha Vantage is a __free service__ that enables users to get __real-time and historical financial data__. New users will need to visit [Alpha Vantage](https://www.alphavantage.co/) and obtain an API key.
 
 ## R Interface: Getting Started
 
-The `alphavantager` package provides a convenient and lightweight interface to the Alpha Vantage API. 
+The `alphavantager` package provides a convenient and lightweight interface to the Alpha Vantage API.
 
 To get started, install the package from CRAN or from GitHub:
 
@@ -64,7 +64,7 @@ print(av_api_key())
 Now, you're ready to get financial data via `av_get()`, which accepts the same<sup>1</sup> arguments as the [API Documentation](https://www.alphavantage.co/documentation/) parameters. The function is setup with two primary arguments, `symbol` and `av_fun`, which accepts an equity and one of the API "function" parameters. You can pass additional API parameters via the `...`.
 
 ```{r}
-# Function is streamlined and user adds additional parameters via ... 
+# Function is streamlined and user adds additional parameters via ...
 args(av_get)
 ```
 
@@ -73,9 +73,9 @@ Here are a few examples of retrieving __real-time and historical financial data_
 #### Time Series Data
 
 ```{r, eval=F}
-av_get(symbol     = "MSFT", 
-       av_fun     = "TIME_SERIES_INTRADAY", 
-       interval   = "15min", 
+av_get(symbol     = "MSFT",
+       av_fun     = "TIME_SERIES_INTRADAY",
+       interval   = "15min",
        outputsize = "full")
 ```
 
@@ -96,10 +96,10 @@ av_get("EUR/USD", av_fun = "FX_DAILY", outputsize = "full")
 #### Technical Indicators
 
 ```{r, eval=F}
-av_get(symbol      = "MSFT", 
-       av_fun      = "AROON", 
-       interval    = "monthly", 
-       time_period = 60, 
+av_get(symbol      = "MSFT",
+       av_fun      = "AROON",
+       interval    = "monthly",
+       time_period = 60,
        outputsize  = "full")
 ```
 
@@ -109,6 +109,11 @@ av_get(symbol      = "MSFT",
 av_get(av_fun = "SECTOR")
 ```
 
+#### Fundamental Data
+
+```{r, eval=F}
+av_get(av_fun = "OVERVIEW")
+```
 
 #### Important Notes: av_get()
 

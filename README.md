@@ -59,9 +59,9 @@ which accepts an equity and one of the API “function” parameters. You
 can pass additional API parameters via the `...`.
 
 ``` r
-# Function is streamlined and user adds additional parameters via ... 
+# Function is streamlined and user adds additional parameters via ...
 args(av_get)
-#> function (symbol, av_fun, ...) 
+#> function (symbol, av_fun, ...)
 #> NULL
 ```
 
@@ -71,9 +71,9 @@ financial data**\!
 #### Time Series Data
 
 ``` r
-av_get(symbol     = "MSFT", 
-       av_fun     = "TIME_SERIES_INTRADAY", 
-       interval   = "15min", 
+av_get(symbol     = "MSFT",
+       av_fun     = "TIME_SERIES_INTRADAY",
+       interval   = "15min",
        outputsize = "full")
 #> # A tibble: 780 x 6
 #>    timestamp            open  high   low close  volume
@@ -98,7 +98,7 @@ av_get(symbol     = "MSFT",
 av_get("EUR/USD", av_fun = "CURRENCY_EXCHANGE_RATE")
 #> # A tibble: 1 x 9
 #>   from_currency_c… from_currency_n… to_currency_code to_currency_name
-#>   <chr>            <chr>            <chr>            <chr>           
+#>   <chr>            <chr>            <chr>            <chr>
 #> 1 EUR              Euro             USD              United States D…
 #> # … with 5 more variables: exchange_rate <dbl>, last_refreshed <dttm>,
 #> #   time_zone <chr>, bid_price <dbl>, ask_price <dbl>
@@ -126,23 +126,23 @@ av_get("EUR/USD", av_fun = "FX_DAILY", outputsize = "full")
 #### Technical Indicators
 
 ``` r
-av_get(symbol      = "MSFT", 
-       av_fun      = "AROON", 
-       interval    = "monthly", 
-       time_period = 60, 
+av_get(symbol      = "MSFT",
+       av_fun      = "AROON",
+       interval    = "monthly",
+       time_period = 60,
        outputsize  = "full")
 #> # A tibble: 180 x 3
 #>    time       aroon_down aroon_up
 #>    <date>          <dbl>    <dbl>
-#>  1 2020-02-28       10      100  
-#>  2 2020-01-31       11.7    100  
-#>  3 2019-12-31       13.3    100  
-#>  4 2019-11-29       15      100  
-#>  5 2019-10-31       16.7    100  
-#>  6 2019-09-30       18.3    100  
+#>  1 2020-02-28       10      100
+#>  2 2020-01-31       11.7    100
+#>  3 2019-12-31       13.3    100
+#>  4 2019-11-29       15      100
+#>  5 2019-10-31       16.7    100
+#>  6 2019-09-30       18.3    100
 #>  7 2019-08-30       20       98.3
-#>  8 2019-07-31       21.7    100  
-#>  9 2019-06-28       23.3    100  
+#>  8 2019-07-31       21.7    100
+#>  9 2019-06-28       23.3    100
 #> 10 2019-05-31        0       98.3
 #> # … with 170 more rows
 ```
@@ -156,15 +156,37 @@ av_get(av_fun = "SECTOR")
 #>    <chr>                                  <chr>    <dbl>
 #>  1 Rank A: Real-Time Performance          Energy  0.0125
 #>  2 Rank B: 1 Day Performance              Energy  0.0125
-#>  3 Rank C: 5 Day Performance              Energy -0.154 
-#>  4 Rank D: 1 Month Performance            Energy -0.178 
-#>  5 Rank E: 3 Month Performance            Energy -0.212 
-#>  6 Rank F: Year-to-Date (YTD) Performance Energy -0.247 
-#>  7 Rank G: 1 Year Performance             Energy -0.291 
-#>  8 Rank H: 3 Year Performance             Energy -0.341 
-#>  9 Rank I: 5 Year Performance             Energy -0.405 
-#> 10 Rank J: 10 Year Performance            Energy -0.179 
+#>  3 Rank C: 5 Day Performance              Energy -0.154
+#>  4 Rank D: 1 Month Performance            Energy -0.178
+#>  5 Rank E: 3 Month Performance            Energy -0.212
+#>  6 Rank F: Year-to-Date (YTD) Performance Energy -0.247
+#>  7 Rank G: 1 Year Performance             Energy -0.291
+#>  8 Rank H: 3 Year Performance             Energy -0.341
+#>  9 Rank I: 5 Year Performance             Energy -0.405
+#> 10 Rank J: 10 Year Performance            Energy -0.179
 #> # … with 100 more rows
+```
+
+#### Fundamental Data
+
+``` r
+av_get(symbol = "MSFT",
+       av_fun = "OVERVIEW")
+
+#> # A tibble: 59 x 2
+#>   rank_group  value
+#>   <chr>       <chr>
+#> 1 Symbol      MSFT
+#> 2 AssetType   Common Stock
+#> 3 Name        Microsoft Corporation
+#> 4 Description Microsoft Corporation develops, licenses, and supports software,…
+#> 5 Exchange    NASDAQ
+#> 6 Currency    USD
+#> 7 Country     USA
+#> 8 Sector      Technology
+#> 9 Industry    SoftwareInfrastructure
+#> 10 Address     One Microsoft Way, Redmond, WA, United States, 98052-6399
+#> # … with 49 more rows
 ```
 
 #### Important Notes: av\_get()
