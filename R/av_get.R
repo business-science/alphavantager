@@ -104,6 +104,12 @@ av_get <- function(symbol, av_fun, ...) {
         dots$to_symbol     <- currencies[[2]]
     }
 
+    #symbol search
+    if(av_fun == "SYMBOL_SEARCH") {
+        dots$symbol <- NULL
+        dots$keywords <- symbol
+    }
+
     # Generate URL
     url_params <- stringr::str_c(names(dots), dots, sep = "=", collapse = "&")
     url <- glue::glue("https://www.alphavantage.co/query?function={av_fun}&{url_params}")

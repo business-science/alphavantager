@@ -81,6 +81,24 @@ test_that("call Technical Indicators", {
 
 })
 
+
+# Symbol search
+test_that("symbol search", {
+    skip_if_no_auth()
+    skip_on_cran()
+
+    # SMA
+    symbol       <- "MSFT"
+    av_fun       <- "SYMBOL_SEARCH"
+
+    delay_15_seconds()
+    resp <- av_get(symbol, av_fun = av_fun, symbol = symbol)
+
+    expect_s3_class(resp, "tbl")
+    expect_gt(nrow(resp), 1)
+})
+
+
 # Bad Calls ------
 
 test_that("call results in error", {
@@ -115,3 +133,5 @@ test_that("call with no API key is stopped", {
     av_api_key(key)
 
 })
+
+
