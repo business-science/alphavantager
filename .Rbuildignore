@@ -12,3 +12,4 @@ img
 ^_pkgdown\.yml$
 ^index\.Rmd$
 ^docs$
+^CRAN-SUBMISSION$

@@ -19,8 +19,8 @@ knitr::opts_chunk$set(
 
 # alphavantager
 
-[![Travis-CI Build Status](https://travis-ci.org/business-science/alphavantager.svg?branch=master)](https://travis-ci.org/business-science/alphavantager.svg?branch=master)
-[![codecov](https://codecov.io/gh/business-science/alphavantager/branch/master/graph/badge.svg)](https://codecov.io/gh/business-science/alphavantager)
+
+[![codecov](https://codecov.io/gh/business-science/alphavantager/branch/master/graph/badge.svg)](https://app.codecov.io/gh/business-science/alphavantager)
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/alphavantager)](https://cran.r-project.org/package=alphavantager)
 ![](http://cranlogs.r-pkg.org/badges/alphavantager?color=brightgreen)
 ![](http://cranlogs.r-pkg.org/badges/grand-total/alphavantager?color=brightgreen)

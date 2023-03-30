@@ -14,7 +14,6 @@ URL: https://github.com/business-science/alphavantager
 BugReports: https://github.com/business-science/alphavantager/issues
 License: GPL (>= 3)
 Encoding: UTF-8
-LazyData: true
 Depends: 
     R (>= 3.3.0)
 Imports:
