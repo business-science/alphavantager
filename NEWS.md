@@ -1,4 +1,4 @@
-# alphavantager 0.1.2.9000
+# alphavantager 0.1.3
 
 * `av_get()` - Improve function details in help manual and ReadMe. 
 

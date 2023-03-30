@@ -1,5 +1,8 @@
 #' alphavantager: A lightweight R interface to the Alpha Vantage API
 #'
+#' @description
+#' A lightweight R interface to the Alpha Vantage API
+#'
 #'
 #' @details
 #' The `alphavantager` package provides a lightweight interface to the

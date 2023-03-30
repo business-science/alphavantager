@@ -5,7 +5,7 @@
 \alias{alphavantager}
 \title{alphavantager: A lightweight R interface to the Alpha Vantage API}
 \description{
-alphavantager: A lightweight R interface to the Alpha Vantage API
+A lightweight R interface to the Alpha Vantage API
 }
 \details{
 The \code{alphavantager} package provides a lightweight interface to the
