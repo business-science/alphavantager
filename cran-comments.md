@@ -1,5 +1,5 @@
 ## Release Summary
-This is the third release of alphavantager. This release adds support for ForEx.
+The `alphavantager` package was archived because it's dependency, `timetk` had been archived. This submission is to get `alphavantager` back on CRAN. 
 
 
 ## Test environments
